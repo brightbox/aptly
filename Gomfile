@@ -18,6 +18,7 @@ gom 'github.com/syndtr/goleveldb/leveldb', :commit => '97e257099d2ab9578151ba85e
 gom 'github.com/ugorji/go/codec', :commit => '71c2886f5a673a35f909803f38ece5810165097b'
 gom 'github.com/vaughan0/go-ini', :commit => 'a98ad7ee00ec53921f08832bc06ecf7fd600e6a1'
 gom 'github.com/wsxiaoys/terminal/color', :commit => '5668e431776a7957528361f90ce828266c69ed08'
+gom 'github.com/ncw/swift', :commit => '71da36c561d45ba5420b99262689f91f2d9b8db4'
 
 group :test do
     gom 'gopkg.in/check.v1'

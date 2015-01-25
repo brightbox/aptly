@@ -10,6 +10,7 @@ import (
 	"github.com/smira/aptly/files"
 	"github.com/smira/aptly/http"
 	"github.com/smira/aptly/s3"
+	"github.com/smira/aptly/swift"
 	"github.com/smira/aptly/utils"
 	"github.com/smira/commander"
 	"github.com/smira/flag"
@@ -263,6 +264,19 @@ func (context *AptlyContext) GetPublishedStorage(name string) aptly.PublishedSto
 			if err != nil {
 				Fatal(err)
 			}
+		} else if strings.HasPrefix(name, "swift:") {
+			params, ok := context.Config().SwiftPublishRoots[name[6:]]
+			if !ok {
+				Fatal(fmt.Errorf("published Swift storage %v not configured", name[6:]))
+			}
+
+			var err error
+			publishedStorage, err = swift.NewPublishedStorage(params.AuthUrl, params.UserName,
+				params.ApiKey, params.Container, params.Prefix)
+			if err != nil {
+				Fatal(err)
+			}
+
 		} else {
 			Fatal(fmt.Errorf("unknown published storage format: %v", name))
 		}
